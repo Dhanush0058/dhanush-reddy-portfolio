@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Send, Mail, MapPin, Loader2, CheckCircle } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -37,7 +39,7 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       toast({
@@ -61,13 +63,18 @@ const ContactSection = () => {
 
     setIsSubmitting(true);
 
-    // Simulate submission (Firebase integration would go here)
+    // Submit to Firebase
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      
+      await addDoc(collection(db, "messages"), {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        timestamp: serverTimestamp()
+      });
+
       setIsSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
-      
+
       toast({
         title: 'Message Sent! 🎉',
         description: "Thank you for reaching out. I'll get back to you soon!",
@@ -130,8 +137,8 @@ const ContactSection = () => {
 
             <div className="p-6 rounded-xl bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/10">
               <p className="text-muted-foreground leading-relaxed">
-                I'm always open to discussing new opportunities, 
-                interesting projects, or just having a chat about technology. 
+                I'm always open to discussing new opportunities,
+                interesting projects, or just having a chat about technology.
                 Don't hesitate to reach out!
               </p>
             </div>
