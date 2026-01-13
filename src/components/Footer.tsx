@@ -50,12 +50,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Built With */}
-        <div className="mt-8 pt-6 border-t border-border/30 text-center">
-          <p className="text-sm text-muted-foreground flex items-center justify-center gap-1.5">
-            Built with <Heart className="w-4 h-4 text-primary fill-primary" /> by Dhanush Reddy
-          </p>
-        </div>
+
       </div>
     </footer>
   );
