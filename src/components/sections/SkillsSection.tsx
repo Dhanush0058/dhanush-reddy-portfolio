@@ -69,7 +69,6 @@ const SkillsSection = () => {
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-foreground font-medium">{skill.name}</span>
-                <span className="text-primary font-mono text-sm">{skill.level}%</span>
               </div>
               <div className="h-3 rounded-full bg-muted overflow-hidden">
                 <div

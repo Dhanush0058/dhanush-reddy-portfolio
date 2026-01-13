@@ -4,9 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 const HeroSection = () => {
-  const [displayText, setDisplayText] = useState('');
-  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+
   const [heroData, setHeroData] = useState({
     greeting: "Hello, I'm",
     name: "Dhanush Reddy",
@@ -34,33 +32,7 @@ const HeroSection = () => {
     fetchHeroData();
   }, []);
 
-  const roles = heroData.roles;
 
-  useEffect(() => {
-    if (!roles || roles.length === 0) return;
-
-    const currentRole = roles[currentRoleIndex];
-    const typeSpeed = isDeleting ? 50 : 100;
-
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (displayText.length < currentRole.length) {
-          setDisplayText(currentRole.slice(0, displayText.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), 2000);
-        }
-      } else {
-        if (displayText.length > 0) {
-          setDisplayText(displayText.slice(0, -1));
-        } else {
-          setIsDeleting(false);
-          setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-        }
-      }
-    }, typeSpeed);
-
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentRoleIndex, roles]);
 
   return (
     <section
@@ -79,15 +51,19 @@ const HeroSection = () => {
           <span className="inline-block ml-2 animate-float">👋</span>
         </h1>
 
-        {/* Typing Effect */}
-        <div className="h-12 md:h-16 flex items-center justify-center mb-6 opacity-0 animate-fade-in-up stagger-3">
-          <span className="text-xl md:text-3xl text-muted-foreground font-light">
-            {displayText}
-          </span>
-          <span className="typing-cursor" />
+        {/* Roles - Static & Clean */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8 opacity-0 animate-fade-in-up stagger-3">
+          {heroData.roles.map((role, index) => (
+            <span key={role} className="flex items-center">
+              <span className="text-xl md:text-2xl text-muted-foreground font-light">
+                {role}
+              </span>
+              {index < heroData.roles.length - 1 && (
+                <span className="mx-3 text-primary/50 text-xl">•</span>
+              )}
+            </span>
+          ))}
         </div>
-
-
         {/* Social Links */}
         <div className="flex items-center justify-center gap-4 mb-12 opacity-0 animate-fade-in-up stagger-5">
           <a
@@ -117,6 +93,7 @@ const HeroSection = () => {
           </a>
         </div>
 
+
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-in-up stagger-5">
           <a
@@ -142,7 +119,7 @@ const HeroSection = () => {
       >
         <ChevronDown size={32} />
       </a>
-    </section>
+    </section >
   );
 };
 
