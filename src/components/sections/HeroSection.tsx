@@ -16,6 +16,9 @@ const HeroSection = () => {
     ]
   });
 
+  const [displayText, setDisplayText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+
   useEffect(() => {
     const fetchHeroData = async () => {
       try {
@@ -32,6 +35,24 @@ const HeroSection = () => {
     fetchHeroData();
   }, []);
 
+  // Typewriter effect for Name
+  useEffect(() => {
+    if (!heroData.name) return;
+
+    let i = 0;
+    const typingInterval = setInterval(() => {
+      if (i < heroData.name.length) {
+        setDisplayText(heroData.name.substring(0, i + 1));
+        i++;
+      } else {
+        setIsTyping(false);
+        clearInterval(typingInterval);
+      }
+    }, 150); // Typing speed
+
+    return () => clearInterval(typingInterval);
+  }, [heroData.name]);
+
 
 
   return (
@@ -46,8 +67,11 @@ const HeroSection = () => {
         </p>
 
         {/* Name */}
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-reveal-text stagger-2">
-          <span className="gradient-text">{heroData.name}</span>
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up stagger-2">
+          <span className="gradient-text">
+            {displayText}
+            <span className={`inline-block w-1 h-8 md:h-12 bg-primary ml-1 align-middle ${isTyping ? 'animate-pulse' : 'opacity-0'}`}></span>
+          </span>
           <span className="inline-block ml-2 animate-float">👋</span>
         </h1>
 
