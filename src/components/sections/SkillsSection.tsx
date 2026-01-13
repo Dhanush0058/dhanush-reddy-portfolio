@@ -60,31 +60,15 @@ const SkillsSection = () => {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {skills.map((skill, index) => (
             <div
               key={skill.name}
-              className="fade-in-section"
+              className="fade-in-section card-glass p-6 flex flex-col items-center justify-center text-center hover:scale-105 transition-transform duration-300 group"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-foreground font-medium">{skill.name}</span>
-              </div>
-              <div className="h-3 rounded-full bg-muted overflow-hidden">
-                <div
-                  className={`h-full rounded-full bg-gradient-to-r ${skill.color} transition-all duration-1000 ease-out`}
-                  style={{
-                    width: '0%',
-                    animation: 'growWidth 1.5s ease-out forwards',
-                    animationDelay: `${0.3 + index * 0.1}s`,
-                  }}
-                />
-              </div>
-              <style>{`
-                @keyframes growWidth {
-                  to { width: ${skill.level}%; }
-                }
-              `}</style>
+              <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${skill.color} opacity-80 mb-4 group-hover:opacity-100 transition-opacity blur-[2px] group-hover:blur-0`} />
+              <h3 className="text-foreground font-semibold text-lg">{skill.name}</h3>
             </div>
           ))}
         </div>
