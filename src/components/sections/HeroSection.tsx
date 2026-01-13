@@ -1,19 +1,44 @@
 import { useEffect, useState } from 'react';
 import { Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 const HeroSection = () => {
   const [displayText, setDisplayText] = useState('');
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  
-  const roles = [
-    'B.Tech IT Student',
-    'Coder',
-    'AI/ML Learner',
-    'Problem Solver',
-  ];
+  const [heroData, setHeroData] = useState({
+    greeting: "Hello, I'm",
+    name: "Dhanush Reddy",
+    roles: [
+      'B.Tech IT Student',
+      'Coder',
+      'AI/ML Learner',
+      'Problem Solver',
+    ]
+  });
 
   useEffect(() => {
+    const fetchHeroData = async () => {
+      try {
+        const docRef = doc(db, "content", "hero");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setHeroData(docSnap.data() as any);
+        }
+      } catch (error) {
+        console.error("Error fetching hero data:", error);
+      }
+    };
+
+    fetchHeroData();
+  }, []);
+
+  const roles = heroData.roles;
+
+  useEffect(() => {
+    if (!roles || roles.length === 0) return;
+
     const currentRole = roles[currentRoleIndex];
     const typeSpeed = isDeleting ? 50 : 100;
 
@@ -45,12 +70,12 @@ const HeroSection = () => {
       <div className="text-center max-w-4xl mx-auto">
         {/* Greeting */}
         <p className="text-primary font-mono text-sm md:text-base mb-4 opacity-0 animate-fade-in-up stagger-1">
-          Hello, I'm
+          {heroData.greeting}
         </p>
 
         {/* Name */}
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up stagger-2">
-          <span className="gradient-text glow-text">Dhanush Reddy</span>
+          <span className="gradient-text glow-text">{heroData.name}</span>
           <span className="inline-block ml-2 animate-float">👋</span>
         </h1>
 
