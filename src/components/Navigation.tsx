@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import logo from '@/assets/logo.png';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -42,9 +43,9 @@ const Navigation = () => {
           {/* Logo */}
           <a
             href="#home"
-            className="text-xl font-bold gradient-text animated-underline"
+            className="flex items-center"
           >
-            DR
+            <img src={logo} alt="Dhanush Reddy" className="h-10 w-auto" />
           </a>
 
           {/* Desktop Navigation */}
