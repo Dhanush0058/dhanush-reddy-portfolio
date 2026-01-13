@@ -85,23 +85,11 @@ const AboutSection = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-8 border-t border-border/50">
-              {highlights.map((item) => (
-                <div key={item.title} className="flex flex-col items-center text-center space-y-3 p-4 rounded-lg bg-background/30 hover:bg-background/50 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                    <item.icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">{item.title}</h3>
-                    <p className="text-xs text-muted-foreground mt-1">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
-    </section>
+
+    </section >
   );
 };
 
