@@ -62,11 +62,6 @@ const HeroSection = () => {
           <span className="typing-cursor" />
         </div>
 
-        {/* Subtitle */}
-        <p className="text-muted-foreground text-lg md:text-xl mb-8 opacity-0 animate-fade-in-up stagger-4">
-          Cybersecurity Intern at{' '}
-          <span className="text-secondary">Supraja Technologies</span>
-        </p>
 
         {/* Social Links */}
         <div className="flex items-center justify-center gap-4 mb-12 opacity-0 animate-fade-in-up stagger-5">
