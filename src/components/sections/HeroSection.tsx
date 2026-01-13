@@ -46,7 +46,7 @@ const HeroSection = () => {
         </p>
 
         {/* Name */}
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up stagger-2">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-reveal-text stagger-2">
           <span className="gradient-text">{heroData.name}</span>
           <span className="inline-block ml-2 animate-float">👋</span>
         </h1>

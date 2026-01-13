@@ -232,6 +232,25 @@
       opacity: 0.8;
     }
   }
+
+  /* Text Reveal Animation */
+  @keyframes reveal-text {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(10px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .animate-reveal-text {
+    animation: reveal-text 1s cubic-bezier(0.2, 0.65, 0.3, 0.9) forwards;
+  }
 }
 
 
