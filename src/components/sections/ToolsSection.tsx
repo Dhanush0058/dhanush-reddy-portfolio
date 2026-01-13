@@ -1,18 +1,56 @@
 import { useEffect, useRef } from 'react';
 
 const tools = [
-  { name: 'C', icon: '🔷' },
-  { name: 'Python', icon: '🐍' },
-  { name: 'Java', icon: '☕' },
-  { name: 'HTML5', icon: '🌐' },
-  { name: 'CSS3', icon: '🎨' },
-  { name: 'JavaScript', icon: '⚡' },
-  { name: 'Git', icon: '📦' },
-  { name: 'GitHub', icon: '🐙' },
-  { name: 'VS Code', icon: '💻' },
-  { name: 'HackerRank', icon: '💚' },
-  { name: 'NumPy', icon: '🔢' },
-  { name: 'LeetCode', icon: '🧩' },
+  { 
+    name: 'C', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg'
+  },
+  { 
+    name: 'Python', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'
+  },
+  { 
+    name: 'Java', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg'
+  },
+  { 
+    name: 'HTML5', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg'
+  },
+  { 
+    name: 'CSS3', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg'
+  },
+  { 
+    name: 'JavaScript', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg'
+  },
+  { 
+    name: 'Git', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg'
+  },
+  { 
+    name: 'GitHub', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+    invert: true
+  },
+  { 
+    name: 'VS Code', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg'
+  },
+  { 
+    name: 'HackerRank', 
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/4/40/HackerRank_Icon-1000px.png'
+  },
+  { 
+    name: 'NumPy', 
+    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg'
+  },
+  { 
+    name: 'LeetCode', 
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png',
+    invert: true
+  },
 ];
 
 const ToolsSection = () => {
@@ -54,8 +92,12 @@ const ToolsSection = () => {
               className="fade-in-section card-glass p-4 text-center group"
               style={{ animationDelay: `${index * 0.05}s` }}
             >
-              <div className="text-4xl mb-3 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
-                {tool.icon}
+              <div className="w-12 h-12 mx-auto mb-3 transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                <img 
+                  src={tool.logo} 
+                  alt={tool.name}
+                  className={`w-full h-full object-contain ${tool.invert ? 'invert' : ''}`}
+                />
               </div>
               <p className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                 {tool.name}
